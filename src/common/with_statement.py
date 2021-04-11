@@ -46,14 +46,16 @@ def managed_file(name, mode):
     Questions to ask.
     1. What does the contextmanager decorator do?
     2. Why do we need to add a 'yield' statement?
-        - Do functions decorated with contextmanager output a generator?
+        - Do functions decorated with contextmanager output a generator? Yep that's right.
     """
     file = None
     try:
         file = open(name, mode)
         yield file
+        print("Temporarily suspended. You won't see me until file closes ... ")
     finally:
         if file:
+            print("Closing the file ... ")
             file.close()
 
 
