@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 
 
 def with_example():
@@ -36,9 +37,35 @@ class ManagedFile:
             self.file.close()
 
 
+@contextmanager
+def managed_file(name, mode):
+    """
+    Fortunately, we can create our own context managers without having
+    to do what we did above.
+
+    Questions to ask.
+    1. What does the contextmanager decorator do?
+    2. Why do we need to add a 'yield' statement?
+        - Do functions decorated with contextmanager output a generator?
+    """
+    file = None
+    try:
+        file = open(name, mode)
+        yield file
+    finally:
+        if file:
+            file.close()
+
+
 if __name__ == "__main__":
     with_example()
+    file_name, mode = 'dummy.txt', 'r'
 
     # We can create our own context class
-    with ManagedFile('dummy.txt', 'r') as file:
+    with ManagedFile(file_name, mode) as file:
+        print(file.read())
+
+    print("-" * 100)
+    # Context manager example
+    with managed_file(file_name, mode) as file:
         print(file.read())
