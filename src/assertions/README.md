@@ -7,10 +7,12 @@ Important points that I learned regarding assertions:
 
 ## Dangers of assertions
 
-1. **Assertions can be disabled**. 
+### 1. Assertions can be disabled.
 
 Therefore, never write assertions to validate data, especially if the validation task
 is to prevent erroneous inputs in sensitive or mission-critical operations.
+
+### 2. Assertions should never be used for validation
 
 From the book Python Tricks (example is modified), we can see that while the first test obviously passes,
 we see something potentially strange in the second assert statement.
@@ -33,3 +35,13 @@ assert (1 == 2, 'should always fail')
 This is because we are passing a tuple to the assert statement, namely a tuple with two objects
 `(1 == 2, 'should always fail')`. Non-empty tuples are truthy values in Python, which is why
 we can potentially write erroneous assert statements if we are not careful.
+
+
+## Key takeaways
+
+1. Assertions are useful for writing maintainable code, serving as 
+internal documentation to the developer.
+   
+2. Assertions should not use be used for data validation because ...
+
+3. Assertions can be disabled
