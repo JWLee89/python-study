@@ -25,13 +25,14 @@ class ManagedFile:
         :return: the file (output of open
         :rtype:
         """
+        print("Runs when the code executes with() block")
         self.file = open(self.name, self.mode)
         print(f"Opened file ... {self.name} in '{self.mode}' mode")
         return self.file
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.file:
-            print("File closing ... yee ... ")
+            print("Exiting with() context. File closing ... yee ... ")
             self.file.close()
 
 
