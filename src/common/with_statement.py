@@ -51,6 +51,7 @@ def managed_file(name, mode):
     file = None
     try:
         file = open(name, mode)
+        print("Opened the file. Exiting the function so that with statement body runs")
         yield file
         print("Temporarily suspended. You won't see me until file closes ... ")
     finally:
