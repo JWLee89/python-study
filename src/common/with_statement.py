@@ -60,6 +60,22 @@ def managed_file(name, mode):
             file.close()
 
 
+class Indenter:
+    def __init__(self):
+        self.indent_level = -1
+
+    def __enter__(self):
+        self.indent_level += 1
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.indent_level != 0:
+            self.indent_level -= 1
+
+    def print(self, *item):
+        print('   ' * self.indent_level, *item)
+
+
 if __name__ == "__main__":
     with_example()
     file_name, mode = 'dummy.txt', 'r'
@@ -72,3 +88,15 @@ if __name__ == "__main__":
     # Context manager example
     with managed_file(file_name, mode) as file:
         print(file.read())
+
+    print("-" * 100)
+
+    # Implement our own indenter:
+    with Indenter() as indent:
+        print(indent)
+        indent.print('captain', 'yee')
+        with indent:
+            indent.print('teemo')
+            with indent:
+                indent.print('on duty!')
+            indent.print("yee")
