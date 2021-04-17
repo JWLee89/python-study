@@ -52,7 +52,6 @@ def emphasis(func):
 
 @strong
 @emphasis
-# @compute_time_ms
 def greet():
     return 'Hello'
 
