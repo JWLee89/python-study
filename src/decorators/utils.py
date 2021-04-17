@@ -1,3 +1,4 @@
+import functools
 import time
 import numpy as np
 
@@ -30,6 +31,7 @@ def compute_time_ms(func):
     """
     Decorator for computing the amount of time taken to do something
     """
+    @functools.wraps(func)
     def wrapper(*args, **kwargs):
         start_time = time.time()
         original_result = func(*args, **kwargs)
@@ -57,6 +59,25 @@ def greet():
     return 'Hello'
 
 
+def trace(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        print(f"TRACE: calling {func.__name__}() "
+              f"with {args}, {kwargs}")
+        original_result = func(*args, **kwargs)
+        print(f"TRACE: {func.__name__}() "
+              f"returned: {original_result!r}")
+        return original_result
+    return wrapper
+
+
+@trace
+def say(name, line):
+    return f'{name}, {line}'
+
+
+
+@trace
 @compute_time_ms
 def do_something(text):
     result = ''
@@ -68,3 +89,6 @@ def do_something(text):
 if __name__ == "__main__":
     print(greet())
     print(do_something("yee "))
+    print(do_something.__name__)
+
+    say('Jane', 'Hello World')
