@@ -39,10 +39,32 @@ def compute_time_ms(func):
     return wrapper
 
 
+def strong(func):
+    def wrapper():
+        return '<strong>' + func() + '</strong>'
+    return wrapper
+
+
+def emphasis(func):
+    def wrapper():
+        return '<em>' + func() + '</em>'
+    return wrapper
+
+@strong
+@emphasis
+# @compute_time_ms
+def greet():
+    return 'Hello'
+
+
 @compute_time_ms
-def greet(input_str):
-    return input_str
+def do_something(text):
+    result = ''
+    for i in range(100):
+        result += text
+    return result
 
 
 if __name__ == "__main__":
-    print(greet("hello world"))
+    print(greet())
+    print(do_something("yee "))
