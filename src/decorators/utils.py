@@ -52,6 +52,7 @@ def emphasis(func):
 
 @strong
 @emphasis
+# Python decorators are applied from bottom to top. Remember that :)
 def greet():
     return 'Hello'
 
