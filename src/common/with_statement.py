@@ -63,6 +63,17 @@ def managed_file(name, mode):
 
 
 class TimeComputer:
+    """
+    Class for running experiments for computing the average time taken
+    to perform computation over a series of N runs. Example:
+
+    time_elapsed_ms = []
+    for i in range(100):
+        with TimeComputer(time_elapsed_ms) as tc:
+            # Run experiment here
+            items = list(range(100000))
+     print(f"Avg time elapsed: {TimeComputer.compute_avg_time(time_elapsed_ms, unit=TimeComputer.Units.MS)}")
+    """
     class Units:
         MS = 'milliseconds'
 
@@ -85,7 +96,6 @@ class TimeComputer:
         if unit == TimeComputer.Units.MS:
             avg_time *= 1000
         return avg_time
-
 
 
 class Indenter:
