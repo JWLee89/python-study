@@ -46,3 +46,47 @@ if __name__ == "__main__":
 
 The code snippet above shows three "different" ways of 
 retrieving an attribute from a class instance. 
+
+Descriptors are a great way of reducing boilerplate code, 
+especially when we have data attributes of the same type that 
+require the same sanity check. The code below is a simple example of 
+the descriptor protocol implemented by the `Quantity` class. 
+The code snippet is also available under `descriptor.py`
+
+```python
+class Quantity:
+    def __init__(self, storage_name):
+        self.storage_name = storage_name
+
+    def __set__(self, instance, value):
+        if value >= 0:
+            instance.__dict__[self.storage_name] = value
+        else:
+            raise ValueError("Value must be >= 0")
+
+
+class LineItem:
+    weight = Quantity("weight")
+    price = Quantity("price")
+
+    def __init__(self, description, weight, price):
+        self.description = description
+        self.weight = weight
+        self.price = price
+
+    def __repr__(self):
+        return f"description: {self.description}, " \
+               f"weight: {self.weight}, " \
+               f"price: {self.price}"
+
+
+if __name__ == "__main__":
+    weight, price = 10, 20
+    flower = LineItem("a flower ...", weight, price)
+
+    weight, price = 10, -9999
+    try:
+        flower = LineItem("a flower ...", weight, price)
+    except ValueError:
+        print("error raised due to invalid price")
+```
