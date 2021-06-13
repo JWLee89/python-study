@@ -13,3 +13,5 @@ These source code snippets are written to solidify the knowledge acquired from r
 Please support the authors if these materials help. 
 
 1. [Python Tricks: A Buffet of Awesome Python Features 1st Edition](https://amzn.to/3g1eH4I)
+2. [Fluent Python: Clear, Concise, and Effective Programming 1st Edition](https://amzn.to/2TsphrT): 
+Note - The second edition is on its way and will be available for purchase in December 2021.
