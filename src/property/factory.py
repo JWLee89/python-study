@@ -19,9 +19,7 @@ def quantity(name: str):
     Create a quantity property, which by definition is:
     1. A positive Integer (>= 0)
     Args:
-        instance (): The object instance to attach
-        the property to
-        name (): The name of the property
+        name (str): The name of the property
     Returns:
 
     """
@@ -32,6 +30,12 @@ def quantity(name: str):
         return instance.__dict__[name]
 
     def setter(instance, new_value: int):
+        """
+        Setter for newly-created property
+        Args:
+            instance (t.Any): The instance to attach property to
+            new_value (int): The new value to assign
+        """
         if not isinstance(new_value, int):
             raise TypeError("New value must be an integer")
 
