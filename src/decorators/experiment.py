@@ -44,7 +44,7 @@ def handle_method(func: t.Callable,
 
 def handle_func_or_method(num_arg: int):
 
-    def inner(func_to_wrap: t.Callable):
+    def inner(func_to_wrap: t.Callable) -> t.Callable:
         """
         
         Args:
@@ -52,6 +52,8 @@ def handle_func_or_method(num_arg: int):
             will be wrapping
 
         Returns:
+            (t.Callable): A function that performs some actions before outputting
+            the output of func_to_wrap
 
         """
         @wraps(func_to_wrap)
